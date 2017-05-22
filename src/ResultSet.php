@@ -10,7 +10,6 @@ use Kdyby\Doctrine\NativeQueryWrapper;
 use Librette\Queries\InvalidStateException;
 use Librette\Queries\ResultSetInterface;
 use Nette;
-use Nette\Utils\Paginator as UIPaginator;
 
 
 /**
@@ -104,24 +103,6 @@ class ResultSet extends Nette\Object implements \IteratorAggregate, ResultSetInt
 			$this->query->setMaxResults($limit);
 			$this->iterator = NULL;
 		}
-
-		return $this;
-	}
-
-
-	/**
-	 * @param \Nette\Utils\Paginator
-	 * @param int
-	 * @return ResultSet
-	 */
-	public function applyPaginator(UIPaginator $paginator, ?int $itemsPerPage = NULL) : ResultSetInterface
-	{
-		if ($itemsPerPage !== NULL) {
-			$paginator->setItemsPerPage($itemsPerPage);
-		}
-
-		$paginator->setItemCount($this->getTotalCount());
-		$this->applyPaging($paginator->getOffset(), $paginator->getLength());
 
 		return $this;
 	}
