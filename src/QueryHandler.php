@@ -30,7 +30,7 @@ class QueryHandler extends Object implements QueryHandlerInterface
 
 	public function supports(BaseQuery $query) : bool
 	{
-		return $query instanceof IQuery;
+		return $query instanceof QueryInterface;
 	}
 
 

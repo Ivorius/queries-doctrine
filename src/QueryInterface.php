@@ -9,7 +9,7 @@ use Librette\Queries\QueryInterface as BaseQueryInterface;
 /**
  * @author David Matejka
  */
-interface IQuery extends BaseQueryInterface
+interface QueryInterface extends BaseQueryInterface
 {
 
 }

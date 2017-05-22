@@ -16,12 +16,11 @@ use Nette\Object;
 
 /**
  * @author David Matejka
- *
  * @method onPostFetch(QueryObject $self, Queryable $queryable, \Traversable $data)
  */
-abstract class QueryObject extends Object implements ResultSetQueryInterface, IQuery
+abstract class QueryObject extends Object implements ResultSetQueryInterface, QueryInterface
 {
-	use TSpecificationQuery;
+    use TSpecificationQuery;
 
 	/** @var callable[] */
 	public $onPostFetch = [];

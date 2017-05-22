@@ -8,7 +8,7 @@ use Nette\Object;
 /**
  * @author David Matejka
  */
-abstract class BaseQueryObject extends Object implements IQuery
+abstract class BaseQueryObject extends Object implements QueryInterface
 {
 
 	/**

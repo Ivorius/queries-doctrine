@@ -5,7 +5,7 @@ declare(strict_types=1);
 namespace LibretteTests\Doctrine\Queries;
 
 use Librette\Doctrine\Queries\BaseQueryObject;
-use Librette\Doctrine\Queries\IQuery;
+use Librette\Doctrine\Queries\QueryInterface;
 use Librette\Doctrine\Queries\Queryable;
 use Librette\Doctrine\Queries\QueryHandler;
 use Librette\Doctrine\Queries\QueryObject;
@@ -41,7 +41,7 @@ class QueryHandlerTestCase extends Tester\TestCase
 		$queryHandler = new QueryHandler(\Mockery::mock(Queryable::class));
 		Assert::true($queryHandler->supports(\Mockery::mock(BaseQueryObject::class)));
 		Assert::true($queryHandler->supports(\Mockery::mock(QueryObject::class)));
-		Assert::true($queryHandler->supports(\Mockery::mock(IQuery::class)));
+		Assert::true($queryHandler->supports(\Mockery::mock(QueryInterface::class)));
 		Assert::false($queryHandler->supports(\Mockery::mock(BaseQuery::class)));
 		Assert::false($queryHandler->supports(\Mockery::mock(CountQuery::class)));
 	}
@@ -50,7 +50,7 @@ class QueryHandlerTestCase extends Tester\TestCase
 	public function testFetch() : void
 	{
 		$queryHandler = new QueryHandler($queryable = \Mockery::mock(Queryable::class));
-		$queryHandler->fetch(\Mockery::mock(IQuery::class)->shouldReceive('fetch')->once()->with($queryable)->getMock());
+		$queryHandler->fetch(\Mockery::mock(QueryInterface::class)->shouldReceive('fetch')->once()->with($queryable)->getMock());
 		Assert::true(TRUE);
 	}
 
