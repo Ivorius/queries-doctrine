@@ -1,15 +1,16 @@
 <?php
 namespace Librette\Doctrine\Queries;
 
+use Kdyby\StrictObjects\Scream;
 use Librette\Queries\InvalidArgumentException;
 use Librette\Queries\QueryableInterface;
-use Nette\Object;
 
 /**
  * @author David Matejka
  */
-abstract class BaseQueryObject extends Object implements QueryInterface
+abstract class BaseQueryObject implements QueryInterface
 {
+    use Scream;
 
 	/**
 	 * @param QueryableInterface

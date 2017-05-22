@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace LibretteTests\Doctrine\Queries;
 
 use Doctrine\DBAL\Logging\DebugStack;
+use Kdyby\StrictObjects\Scream;
 use Librette\Doctrine\Queries\EntityQuery;
 use Librette\Doctrine\Queries\Queryable;
 use Librette\Doctrine\Queries\QueryHandler;
@@ -23,7 +24,8 @@ require_once __DIR__ . '/../bootstrap.php';
  */
 class EntityQueryTestCase extends Tester\TestCase
 {
-	use EntityManagerTest;
+    use EntityManagerTest;
+    use Scream;
 
 
 	public function setUp() : void

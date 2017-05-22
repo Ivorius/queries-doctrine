@@ -7,12 +7,15 @@ namespace LibretteTests\Doctrine\Queries\Model;
 use Doctrine\ORM\Mapping as ORM;
 use Kdyby\Doctrine\Entities\Attributes\Identifier;
 use Kdyby\Doctrine\Entities\BaseEntity;
+use Kdyby\StrictObjects\Scream;
 
 /**
  * @ORM\Entity
  */
 class User
 {
+    use Scream;
+
     /**
      * @ORM\Id
      * @ORM\GeneratedValue

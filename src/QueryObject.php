@@ -7,19 +7,19 @@ namespace Librette\Doctrine\Queries;
 use Doctrine;
 use Doctrine\ORM\Query;
 use Doctrine\ORM\QueryBuilder;
+use Kdyby\StrictObjects\Scream;
 use Librette\Doctrine\Queries\Specifications\TSpecificationQuery;
 use Librette\Queries\InvalidArgumentException;
 use Librette\Queries\QueryableInterface;
 use Librette\Queries\ResultSetInterface;
 use Librette\Queries\ResultSetQueryInterface;
-use Nette\Object;
 
 /**
  * @author David Matejka
- * @method onPostFetch(QueryObject $self, Queryable $queryable, \Traversable $data)
  */
-abstract class QueryObject extends Object implements ResultSetQueryInterface, QueryInterface
+abstract class QueryObject implements ResultSetQueryInterface, QueryInterface
 {
+    use Scream;
     use TSpecificationQuery;
 
 	/** @var callable[] */
@@ -109,7 +109,9 @@ abstract class QueryObject extends Object implements ResultSetQueryInterface, Qu
 	 */
 	public function queryFetched(Queryable $queryable, \Traversable $data) : void
 	{
-		$this->onPostFetch($this, $queryable, $data);
+	    foreach ($this->onPostFetch as $postFetch) {
+			$postFetch($this, $queryable, $data);
+        }
 	}
 
 }

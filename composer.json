@@ -6,7 +6,8 @@
 		"librette/queries": "dev-dev",
 		"nette/utils": "~2.2",
 		"kdyby/doctrine": "@dev",
-		"doctrine/orm": "^2.5"
+		"doctrine/orm": "^2.5",
+		"kdyby/strict-objects": "^1.0"
 	},
 	"require-dev": {
 		"nette/tester": "@dev",

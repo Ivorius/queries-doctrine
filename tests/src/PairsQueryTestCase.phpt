@@ -6,6 +6,7 @@ namespace LibretteTests\Doctrine\Queries;
 
 use Doctrine\ORM\EntityManager;
 use Doctrine\ORM\EntityRepository;
+use Kdyby\StrictObjects\Scream;
 use Librette\Doctrine\Queries\PairsQuery;
 use Librette\Doctrine\Queries\Queryable;
 use Librette\Doctrine\Queries\QueryHandler;
@@ -24,6 +25,8 @@ require_once __DIR__ . '/../bootstrap.php';
  */
 class PairsQueryTestCase extends Tester\TestCase
 {
+    use Scream;
+
 	public function tearDown() : void
 	{
 		\Mockery::close();

@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace LibretteTests\Doctrine\Queries;
 
+use Kdyby\StrictObjects\Scream;
 use Librette\Doctrine\Queries\Queryable;
 use Librette\Doctrine\Queries\QueryHandler;
 use Librette\Queries\Internal\InternalQueryable;
@@ -26,6 +27,7 @@ require_once __DIR__ . '/../bootstrap.php';
 class BaseQueryObjectTestCase extends Tester\TestCase
 {
 	use EntityManagerTest;
+	use Scream;
 
 
 	public function tearDown()

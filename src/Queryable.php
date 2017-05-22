@@ -7,15 +7,16 @@ namespace Librette\Doctrine\Queries;
 use Doctrine\ORM\EntityManager;
 use Doctrine\ORM\Query;
 use Kdyby\Doctrine\QueryBuilder;
+use Kdyby\StrictObjects\Scream;
 use Librette\Queries\QueryableInterface;
 use Librette\Queries\QueryHandlerInterface;
-use Nette\Object;
 
 /**
  * @author David Matejka
  */
-class Queryable extends Object implements QueryableInterface
+class Queryable implements QueryableInterface
 {
+    use Scream;
 
 	/** @var EntityManager */
 	protected $entityManager;

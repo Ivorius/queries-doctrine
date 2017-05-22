@@ -4,16 +4,17 @@ declare(strict_types=1);
 
 namespace Librette\Doctrine\Queries;
 
+use Kdyby\StrictObjects\Scream;
 use Librette\Queries\QueryInterface as BaseQuery;
 use Librette\Queries\QueryHandlerInterface;
 use Librette\Queries\ResultSetInterface;
-use Nette\Object;
 
 /**
  * @author David Matejka
  */
-class QueryHandler extends Object implements QueryHandlerInterface
+class QueryHandler implements QueryHandlerInterface
 {
+    use Scream;
 
 	/** @var Queryable */
 	protected $queryable;

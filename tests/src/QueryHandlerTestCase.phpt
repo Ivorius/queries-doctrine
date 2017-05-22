@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace LibretteTests\Doctrine\Queries;
 
+use Kdyby\StrictObjects\Scream;
 use Librette\Doctrine\Queries\BaseQueryObject;
 use Librette\Doctrine\Queries\QueryInterface;
 use Librette\Doctrine\Queries\Queryable;
@@ -24,6 +25,7 @@ require_once __DIR__ . '/../bootstrap.php';
  */
 class QueryHandlerTestCase extends Tester\TestCase
 {
+    use Scream;
 
 	public function setUp() : void
 	{

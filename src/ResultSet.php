@@ -7,16 +7,17 @@ namespace Librette\Doctrine\Queries;
 use Doctrine\ORM;
 use Doctrine\ORM\Tools\Pagination\Paginator as ResultPaginator;
 use Kdyby\Doctrine\NativeQueryWrapper;
+use Kdyby\StrictObjects\Scream;
 use Librette\Queries\InvalidStateException;
 use Librette\Queries\ResultSetInterface;
-use Nette;
 
 
 /**
  * @author David Matejka
  */
-class ResultSet extends Nette\Object implements \IteratorAggregate, ResultSetInterface
+class ResultSet implements \IteratorAggregate, ResultSetInterface
 {
+    use Scream;
 
 	/** @var int */
 	private $totalCount;
