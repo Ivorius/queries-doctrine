@@ -3,7 +3,7 @@
 	"license": ["BSD-3-Clause", "GPL-2.0", "GPL-3.0"],
 	"require": {
 		"php": "^7.1",
-		"librette/queries": "@dev",
+		"librette/queries": "dev-dev",
 		"nette/utils": "~2.2",
 		"kdyby/doctrine": "@dev",
 		"doctrine/orm": "^2.5"
@@ -20,5 +20,11 @@
 		"files": [
 			"src/exceptions.php"
 		]
-	}
+	},
+	"repositories": [
+		{
+			"type": "vcs",
+			"url": "https://github.com/Majkl578/librette-queries"
+		}
+	]
 }

@@ -10,10 +10,10 @@ namespace Librette\Doctrine\Queries;
 class EntityQuery extends BaseQueryObject
 {
 
-	/** @var */
+	/** @var string */
 	private $entityName;
 
-	/** @var */
+	/** @var mixed */
 	private $id;
 
 
@@ -21,7 +21,7 @@ class EntityQuery extends BaseQueryObject
 	 * @param string
 	 * @param int|mixed
 	 */
-	public function __construct($entityName, $id)
+	public function __construct(string $entityName, $id)
 	{
 		$this->entityName = $entityName;
 		$this->id = $id;

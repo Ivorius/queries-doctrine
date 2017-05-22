@@ -8,9 +8,8 @@ use Librette\Doctrine\Queries\Queryable;
 use Librette\Doctrine\Queries\QueryHandler;
 use Librette\Queries\Internal\InternalQueryable;
 use Librette\Queries\InvalidArgumentException;
-use Librette\Queries\IQueryHandler;
-use Librette\Queries\IQueryHandlerAccessor;
-use Librette\Queries\MainQueryHandler;
+use Librette\Queries\QueryHandlerChain;
+use Librette\Queries\QueryHandlerInterface;
 use LibretteTests\Doctrine\Queries\Model\User;
 use LibretteTests\Doctrine\Queries\Queries\UserCountQuery;
 use Nette;
@@ -38,9 +37,8 @@ class BaseQueryObjectTestCase extends Tester\TestCase
 	public function testBasic()
 	{
 		$em = $this->createMemoryManager();
-		$queryHandler = new MainQueryHandler();
-		$accessor = \Mockery::mock(IQueryHandlerAccessor::class)->shouldReceive('get')->andReturn($queryHandler)->getMock();
-		$queryHandler->addHandler(new QueryHandler(new Queryable($em, $accessor)));
+		$queryHandler = new QueryHandlerChain();
+		$queryHandler->addHandler(new QueryHandler(new Queryable($em, $queryHandler)));
 		$em->persist(new User('John'));
 		$em->persist(new User('Jack'));
 		$em->flush();
@@ -51,7 +49,7 @@ class BaseQueryObjectTestCase extends Tester\TestCase
 	public function testInvalidQueryable()
 	{
 		Assert::throws(function () {
-			(new UserCountQuery())->fetch(new InternalQueryable(\Mockery::mock(IQueryHandler::class)));
+			(new UserCountQuery())->fetch(new InternalQueryable(\Mockery::mock(QueryHandlerInterface::class)));
 		}, InvalidArgumentException::class);
 	}
 

@@ -8,7 +8,7 @@ use Doctrine\ORM;
 use Doctrine\ORM\Tools\Pagination\Paginator as ResultPaginator;
 use Kdyby\Doctrine\NativeQueryWrapper;
 use Librette\Queries\InvalidStateException;
-use Librette\Queries\IResultSet;
+use Librette\Queries\ResultSetInterface;
 use Nette;
 use Nette\Utils\Paginator as UIPaginator;
 
@@ -16,7 +16,7 @@ use Nette\Utils\Paginator as UIPaginator;
 /**
  * @author David Matejka
  */
-class ResultSet extends Nette\Object implements \IteratorAggregate, IResultSet
+class ResultSet extends Nette\Object implements \IteratorAggregate, ResultSetInterface
 {
 
 	/** @var int */
@@ -49,7 +49,7 @@ class ResultSet extends Nette\Object implements \IteratorAggregate, IResultSet
 	 * @param QueryObject
 	 * @param Queryable
 	 */
-	public function __construct(ORM\AbstractQuery $query, QueryObject $queryObject = NULL, Queryable $repository = NULL)
+	public function __construct(ORM\AbstractQuery $query, ?QueryObject $queryObject = NULL, ?Queryable $repository = NULL)
 	{
 		$this->query = $query;
 		$this->queryObject = $queryObject;
@@ -65,7 +65,7 @@ class ResultSet extends Nette\Object implements \IteratorAggregate, IResultSet
 	 * @throws InvalidStateException
 	 * @return ResultSet
 	 */
-	public function setFetchJoinCollection($fetchJoinCollection)
+	public function setFetchJoinCollection(bool $fetchJoinCollection) : self
 	{
 		$this->updating();
 
@@ -81,7 +81,7 @@ class ResultSet extends Nette\Object implements \IteratorAggregate, IResultSet
 	 * @throws InvalidStateException
 	 * @return ResultSet
 	 */
-	public function setUseOutputWalkers($useOutputWalkers)
+	public function setUseOutputWalkers(?bool $useOutputWalkers) : self
 	{
 		$this->updating();
 
@@ -97,7 +97,7 @@ class ResultSet extends Nette\Object implements \IteratorAggregate, IResultSet
 	 * @param int
 	 * @return ResultSet
 	 */
-	public function applyPaging($offset, $limit)
+	public function applyPaging(int $offset, int $limit) : ResultSetInterface
 	{
 		if ($this->query->getFirstResult() != $offset || $this->query->getMaxResults() != $limit) {
 			$this->query->setFirstResult($offset);
@@ -114,7 +114,7 @@ class ResultSet extends Nette\Object implements \IteratorAggregate, IResultSet
 	 * @param int
 	 * @return ResultSet
 	 */
-	public function applyPaginator(UIPaginator $paginator, $itemsPerPage = NULL)
+	public function applyPaginator(UIPaginator $paginator, ?int $itemsPerPage = NULL) : ResultSetInterface
 	{
 		if ($itemsPerPage !== NULL) {
 			$paginator->setItemsPerPage($itemsPerPage);
@@ -130,7 +130,7 @@ class ResultSet extends Nette\Object implements \IteratorAggregate, IResultSet
 	/**
 	 * @return bool
 	 */
-	public function isEmpty()
+	public function isEmpty() : bool
 	{
 		$count = $this->getTotalCount();
 		$offset = $this->query->getFirstResult();
@@ -143,7 +143,7 @@ class ResultSet extends Nette\Object implements \IteratorAggregate, IResultSet
 	 * @throws ORM\Query\QueryException
 	 * @return int
 	 */
-	public function getTotalCount()
+	public function getTotalCount() : int
 	{
 		if ($this->totalCount === NULL) {
 			$this->frozen = TRUE;
@@ -159,7 +159,7 @@ class ResultSet extends Nette\Object implements \IteratorAggregate, IResultSet
 	 * @param int|null
 	 * @return \ArrayIterator
 	 */
-	public function getIterator($hydrationMode = NULL)
+	public function getIterator(?int $hydrationMode = NULL) : iterable
 	{
 		if ($this->iterator !== NULL) {
 			return $this->iterator;
@@ -185,7 +185,7 @@ class ResultSet extends Nette\Object implements \IteratorAggregate, IResultSet
 	 * @param int|null
 	 * @return array
 	 */
-	public function toArray($hydrationMode = NULL)
+	public function toArray(?int $hydrationMode = NULL) : array
 	{
 		return iterator_to_array(clone $this->getIterator($hydrationMode), TRUE);
 	}
@@ -194,7 +194,7 @@ class ResultSet extends Nette\Object implements \IteratorAggregate, IResultSet
 	/**
 	 * @return int
 	 */
-	public function count()
+	public function count() : int
 	{
 		return $this->getIterator()->count();
 	}
@@ -204,7 +204,7 @@ class ResultSet extends Nette\Object implements \IteratorAggregate, IResultSet
 	 * @param ORM\Query
 	 * @return ResultPaginator
 	 */
-	private function createPaginatedQuery(ORM\Query $query)
+	private function createPaginatedQuery(ORM\Query $query) : ResultPaginator
 	{
 		$paginated = new ResultPaginator($query, $this->fetchJoinCollection);
 		$paginated->setUseOutputWalkers($this->useOutputWalkers);
@@ -213,7 +213,7 @@ class ResultSet extends Nette\Object implements \IteratorAggregate, IResultSet
 	}
 
 
-	private function updating()
+	private function updating() : void
 	{
 		if ($this->frozen !== FALSE) {
 			throw new InvalidStateException("Cannot modify result set, that was already fetched from storage.");

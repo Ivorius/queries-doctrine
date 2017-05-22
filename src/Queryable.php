@@ -5,33 +5,33 @@ declare(strict_types=1);
 namespace Librette\Doctrine\Queries;
 
 use Doctrine\ORM\EntityManager;
+use Doctrine\ORM\Query;
 use Kdyby\Doctrine\QueryBuilder;
-use Librette\Queries\IQueryable;
-use Librette\Queries\IQueryHandler;
-use Librette\Queries\IQueryHandlerAccessor;
+use Librette\Queries\QueryableInterface;
+use Librette\Queries\QueryHandlerInterface;
 use Nette\Object;
 
 /**
  * @author David Matejka
  */
-class Queryable extends Object implements IQueryable
+class Queryable extends Object implements QueryableInterface
 {
 
 	/** @var EntityManager */
 	protected $entityManager;
 
-	/** @var IQueryHandlerAccessor */
-	private $queryHandlerAccessor;
+	/** @var QueryHandlerInterface */
+	private $queryHandler;
 
 
 	/**
 	 * @param EntityManager
-	 * @param IQueryHandlerAccessor
+	 * @param QueryHandlerInterface
 	 */
-	public function __construct(EntityManager $entityManager, IQueryHandlerAccessor $queryHandlerAccessor)
+	public function __construct(EntityManager $entityManager, QueryHandlerInterface $queryHandler)
 	{
 		$this->entityManager = $entityManager;
-		$this->queryHandlerAccessor = $queryHandlerAccessor;
+		$this->queryHandler = $queryHandler;
 	}
 
 
@@ -41,7 +41,7 @@ class Queryable extends Object implements IQueryable
 	 * @param string|null
 	 * @return QueryBuilder
 	 */
-	public function createQueryBuilder($entityClass = NULL, $alias = NULL, $indexBy = NULL)
+	public function createQueryBuilder(?string $entityClass = NULL, ?string $alias = NULL, ?string $indexBy = NULL) : QueryBuilder
 	{
 		$qb = new QueryBuilder($this->entityManager);
 		if ($entityClass) {
@@ -53,25 +53,25 @@ class Queryable extends Object implements IQueryable
 	}
 
 
-	public function createQuery($query)
+	public function createQuery(string $query) : Query
 	{
 		return $this->entityManager->createQuery($query);
 	}
 
 
 	/**
-	 * @return IQueryHandler
+	 * @return QueryHandlerInterface
 	 */
-	public function getHandler()
+	public function getHandler() : QueryHandlerInterface
 	{
-		return $this->queryHandlerAccessor->get();
+		return $this->queryHandler;
 	}
 
 
 	/**
 	 * @return EntityManager
 	 */
-	public function getEntityManager()
+	public function getEntityManager() : EntityManager
 	{
 		return $this->entityManager;
 	}

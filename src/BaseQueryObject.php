@@ -2,7 +2,7 @@
 namespace Librette\Doctrine\Queries;
 
 use Librette\Queries\InvalidArgumentException;
-use Librette\Queries\IQueryable;
+use Librette\Queries\QueryableInterface;
 use Nette\Object;
 
 /**
@@ -12,10 +12,10 @@ abstract class BaseQueryObject extends Object implements IQuery
 {
 
 	/**
-	 * @param IQueryable
+	 * @param QueryableInterface
 	 * @return mixed
 	 */
-	public function fetch(IQueryable $queryable)
+	public function fetch(QueryableInterface $queryable)
 	{
 		if (!$queryable instanceof Queryable) {
 			throw new InvalidArgumentException("\$queryable must be an instance of " . Queryable::class);

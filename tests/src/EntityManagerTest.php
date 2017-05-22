@@ -22,7 +22,7 @@ trait EntityManagerTest
 	/**
 	 * @return EntityManager
 	 */
-	protected function createMemoryManager($createSchema = TRUE)
+	protected function createMemoryManager(bool $createSchema = TRUE) : EntityManager
 	{
 		$conf = [
 			'driver' => 'pdo_sqlite',

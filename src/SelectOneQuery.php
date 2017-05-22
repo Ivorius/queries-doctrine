@@ -22,7 +22,7 @@ class SelectOneQuery extends BaseQueryObject
 	/**
 	 * @param string
 	 */
-	public function __construct($entityClass, array $filters = [])
+	public function __construct(string $entityClass, array $filters = [])
 	{
 		$this->entityClass = $entityClass;
 		$this->filters = array_map(NULL, array_keys($filters), $filters);
@@ -34,7 +34,7 @@ class SelectOneQuery extends BaseQueryObject
 	 * @param string|array|null|mixed
 	 * @return self
 	 */
-	public function filterBy($field, $value = NULL)
+	public function filterBy(callable $field, $value = NULL) : self
 	{
 		$this->filters[] = [$field, $value];
 
@@ -47,7 +47,7 @@ class SelectOneQuery extends BaseQueryObject
 	 * @param string
 	 * @return self
 	 */
-	public function orderBy($field, $direction = 'ASC')
+	public function orderBy(string $field, string $direction = 'ASC') : self
 	{
 		$this->orderBy[$field] = $direction;
 

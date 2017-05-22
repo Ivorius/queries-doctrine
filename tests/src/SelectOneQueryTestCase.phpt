@@ -9,7 +9,7 @@ use Librette\Doctrine\Queries\EntityQuery;
 use Librette\Doctrine\Queries\Queryable;
 use Librette\Doctrine\Queries\QueryHandler;
 use Librette\Doctrine\Queries\SelectOneQuery;
-use Librette\Queries\IQueryHandlerAccessor;
+use Librette\Queries\QueryHandlerInterface;
 use LibretteTests\Doctrine\Queries\Model\User;
 use Nette;
 use Tester;
@@ -27,15 +27,15 @@ class SelectOneQueryTestCase extends Tester\TestCase
 	use EntityManagerTest;
 
 
-	public function setUp()
+	public function setUp() : void
 	{
 	}
 
 
-	public function testSelect()
+	public function testSelect() : void
 	{
 		$em = $this->createMemoryManager();
-		$queryHandler = new QueryHandler(new Queryable($em, \Mockery::mock(IQueryHandlerAccessor::class)));
+		$queryHandler = new QueryHandler(new Queryable($em, \Mockery::mock(QueryHandlerInterface::class)));
 		$em->persist($john = new User('John'));
 		$em->persist($jack = new User('Jack'));
 		$em->flush();

@@ -8,7 +8,7 @@ use Doctrine\DBAL\Logging\DebugStack;
 use Librette\Doctrine\Queries\EntityQuery;
 use Librette\Doctrine\Queries\Queryable;
 use Librette\Doctrine\Queries\QueryHandler;
-use Librette\Queries\IQueryHandlerAccessor;
+use Librette\Queries\QueryHandlerInterface;
 use LibretteTests\Doctrine\Queries\Model\User;
 use Nette;
 use Tester;
@@ -26,15 +26,15 @@ class EntityQueryTestCase extends Tester\TestCase
 	use EntityManagerTest;
 
 
-	public function setUp()
+	public function setUp() : void
 	{
 	}
 
 
-	public function testAfterInsert()
+	public function testAfterInsert() : void
 	{
 		$em = $this->createMemoryManager();
-		$queryHandler = new QueryHandler(new Queryable($em, \Mockery::mock(IQueryHandlerAccessor::class)));
+		$queryHandler = new QueryHandler(new Queryable($em, \Mockery::mock(QueryHandlerInterface::class)));
 		$em->persist($user = new User('John'));
 		$em->flush();
 		$em->getConnection()->getConfiguration()->setSQLLogger($logger = new DebugStack());
@@ -45,10 +45,10 @@ class EntityQueryTestCase extends Tester\TestCase
 	}
 
 
-	public function testRepeatedSelect()
+	public function testRepeatedSelect() : void
 	{
 		$em = $this->createMemoryManager();
-		$queryHandler = new QueryHandler(new Queryable($em, \Mockery::mock(IQueryHandlerAccessor::class)));
+		$queryHandler = new QueryHandler(new Queryable($em, \Mockery::mock(QueryHandlerInterface::class)));
 		$em->persist($user = new User('John'));
 		$em->flush();
 		$em->clear();

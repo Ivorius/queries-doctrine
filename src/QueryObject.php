@@ -5,12 +5,13 @@ declare(strict_types=1);
 namespace Librette\Doctrine\Queries;
 
 use Doctrine;
+use Doctrine\ORM\Query;
 use Doctrine\ORM\QueryBuilder;
 use Librette\Doctrine\Queries\Specifications\TSpecificationQuery;
 use Librette\Queries\InvalidArgumentException;
-use Librette\Queries\IQueryable;
-use Librette\Queries\IResultSet;
-use Librette\Queries\IResultSetQuery;
+use Librette\Queries\QueryableInterface;
+use Librette\Queries\ResultSetInterface;
+use Librette\Queries\ResultSetQueryInterface;
 use Nette\Object;
 
 /**
@@ -18,25 +19,25 @@ use Nette\Object;
  *
  * @method onPostFetch(QueryObject $self, Queryable $queryable, \Traversable $data)
  */
-abstract class QueryObject extends Object implements IResultSetQuery, IQuery
+abstract class QueryObject extends Object implements ResultSetQueryInterface, IQuery
 {
 	use TSpecificationQuery;
 
 	/** @var callable[] */
 	public $onPostFetch = [];
 
-	/** @var \Doctrine\ORM\Query */
+	/** @var Query */
 	private $lastQuery;
 
-	/** @var IResultSet */
+	/** @var ResultSetInterface */
 	private $lastResult;
 
 
 	/**
-	 * @param IQueryable
-	 * @return IResultSet
+	 * @param QueryableInterface
+	 * @return ResultSetInterface
 	 */
-	public function fetch(IQueryable $queryable)
+	public function fetch(QueryableInterface $queryable) : ResultSetInterface
 	{
 		if (!$queryable instanceof Queryable) {
 			throw new InvalidArgumentException("\$queryable must be an instance of " . Queryable::class);
@@ -50,11 +51,11 @@ abstract class QueryObject extends Object implements IResultSetQuery, IQuery
 
 
 	/**
-	 * @param IQueryable
-	 * @return \Doctrine\ORM\Query
+	 * @param Queryable
+	 * @return Query
 	 * @internal
 	 */
-	public function getQuery(Queryable $repository)
+	public function getQuery(Queryable $repository) : Query
 	{
 		$qb = $this->createQuery($repository);
 		$this->applySpecifications($qb, $qb->getRootAliases()[0]);
@@ -76,9 +77,9 @@ abstract class QueryObject extends Object implements IResultSetQuery, IQuery
 
 	/**
 	 * @internal
-	 * @return \Doctrine\ORM\Query
+	 * @return Query
 	 */
-	public function getLastQuery()
+	public function getLastQuery() : Query
 	{
 		return $this->lastQuery;
 	}
@@ -87,9 +88,9 @@ abstract class QueryObject extends Object implements IResultSetQuery, IQuery
 	/**
 	 * @param Doctrine\ORM\Query
 	 * @param Queryable
-	 * @return IResultSet
+	 * @return ResultSetInterface
 	 */
-	protected function createResultSet(Doctrine\ORM\Query $query, Queryable $queryable)
+	protected function createResultSet(Query $query, Queryable $queryable) : ResultSetInterface
 	{
 		return new ResultSet($query, $this, $queryable);
 	}
@@ -99,7 +100,7 @@ abstract class QueryObject extends Object implements IResultSetQuery, IQuery
 	 * @param Queryable
 	 * @return QueryBuilder
 	 */
-	abstract protected function createQuery(Queryable $queryable);
+	abstract protected function createQuery(Queryable $queryable) : QueryBuilder;
 
 
 	/**
@@ -107,7 +108,7 @@ abstract class QueryObject extends Object implements IResultSetQuery, IQuery
 	 * @param \Traversable
 	 * @internal
 	 */
-	public function queryFetched(Queryable $queryable, \Traversable $data)
+	public function queryFetched(Queryable $queryable, \Traversable $data) : void
 	{
 		$this->onPostFetch($this, $queryable, $data);
 	}

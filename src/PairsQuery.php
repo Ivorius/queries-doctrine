@@ -37,7 +37,7 @@ class PairsQuery extends BaseQueryObject
 	 * @param array
 	 * @return self
 	 */
-	public function setFilter(array $filter)
+	public function setFilter(array $filter) : self
 	{
 		$this->filter = $filter;
 
@@ -49,7 +49,7 @@ class PairsQuery extends BaseQueryObject
 	 * @param string
 	 * @return self
 	 */
-	public function setKey($key)
+	public function setKey(string $key) : self
 	{
 		$this->key = $key;
 
@@ -61,7 +61,7 @@ class PairsQuery extends BaseQueryObject
 	 * @param array
 	 * @return self
 	 */
-	public function setOrderBy(array $orderBy)
+	public function setOrderBy(array $orderBy) : self
 	{
 		$this->orderBy = $orderBy;
 

@@ -10,7 +10,7 @@ use Librette\Doctrine\Queries\Queryable;
 use Librette\Doctrine\Queries\QueryHandler;
 use Librette\Doctrine\Queries\QueryObject;
 use Librette\Queries\CountQuery;
-use Librette\Queries\IQuery as BaseQuery;
+use Librette\Queries\QueryInterface as BaseQuery;
 use Nette;
 use Tester;
 use Tester\Assert;
@@ -25,18 +25,18 @@ require_once __DIR__ . '/../bootstrap.php';
 class QueryHandlerTestCase extends Tester\TestCase
 {
 
-	public function setUp()
+	public function setUp() : void
 	{
 	}
 
 
-	public function tearDown()
+	public function tearDown() : void
 	{
 		\Mockery::close();
 	}
 
 
-	public function testSupports()
+	public function testSupports() : void
 	{
 		$queryHandler = new QueryHandler(\Mockery::mock(Queryable::class));
 		Assert::true($queryHandler->supports(\Mockery::mock(BaseQueryObject::class)));
@@ -47,7 +47,7 @@ class QueryHandlerTestCase extends Tester\TestCase
 	}
 
 
-	public function testFetch()
+	public function testFetch() : void
 	{
 		$queryHandler = new QueryHandler($queryable = \Mockery::mock(Queryable::class));
 		$queryHandler->fetch(\Mockery::mock(IQuery::class)->shouldReceive('fetch')->once()->with($queryable)->getMock());

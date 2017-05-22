@@ -9,7 +9,7 @@ use Doctrine\ORM\EntityRepository;
 use Librette\Doctrine\Queries\PairsQuery;
 use Librette\Doctrine\Queries\Queryable;
 use Librette\Doctrine\Queries\QueryHandler;
-use Librette\Queries\IQueryHandlerAccessor;
+use Librette\Queries\QueryHandlerInterface;
 use LibretteTests\Doctrine\Queries\Model\User;
 use Nette;
 use Tester;
@@ -24,13 +24,13 @@ require_once __DIR__ . '/../bootstrap.php';
  */
 class PairsQueryTestCase extends Tester\TestCase
 {
-	public function tearDown()
+	public function tearDown() : void
 	{
 		\Mockery::close();
 	}
 
 
-	public function testBasic()
+	public function testBasic() : void
 	{
 		$repo = \Mockery::mock(EntityRepository::class)
 			->shouldReceive('findPairs')
@@ -46,7 +46,7 @@ class PairsQueryTestCase extends Tester\TestCase
 			->shouldReceive('getRepository')
 			->andReturn($repo)
 			->getMock();
-		$queryHandler = new QueryHandler(new Queryable($em, \Mockery::mock(IQueryHandlerAccessor::class)));
+		$queryHandler = new QueryHandler(new Queryable($em, \Mockery::mock(QueryHandlerInterface::class)));
 		$query = new PairsQuery(User::class, 'name');
 		$query->setKey('id');
 		$query->setFilter(['name' => 'John']);
