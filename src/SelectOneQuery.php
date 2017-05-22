@@ -4,11 +4,14 @@ declare(strict_types=1);
 
 namespace Librette\Doctrine\Queries;
 
+use Kdyby\StrictObjects\Scream;
+
 /**
  * @author David Matejka
  */
-class SelectOneQuery extends BaseQueryObject
+class SelectOneQuery implements QueryInterface
 {
+    use Scream;
 
 	/** @var string */
 	private $entityClass;
@@ -54,24 +57,28 @@ class SelectOneQuery extends BaseQueryObject
 		return $this;
 	}
 
+    /**
+     * @return string
+     */
+    public function getEntityClass() : string
+    {
+        return $this->entityClass;
+    }
 
-	protected function doFetch(Queryable $queryable)
-	{
-		$qb = $queryable->createQueryBuilder($this->entityClass, 'e');
-		foreach ($this->filters as $filter) {
-			list ($field, $value) = $filter;
-			if ($value === NULL && $field instanceof \Closure) {
-				$field($qb, 'e');
-			} else {
-				$qb->whereCriteria([$field => $value]);
-			}
-		}
-		foreach ($this->orderBy as $field => $direction) {
-			$qb->autoJoinOrderBy($field, $direction);
-		}
-		$qb->setMaxResults(1);
+    /**
+     * @return array
+     */
+    public function getFilters() : array
+    {
+        return $this->filters;
+    }
 
-		return $qb->getQuery()->getOneOrNullResult();
-	}
+    /**
+     * @return array
+     */
+    public function getOrderBy() : array
+    {
+        return $this->orderBy;
+    }
 
 }

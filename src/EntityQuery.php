@@ -4,11 +4,14 @@ declare(strict_types=1);
 
 namespace Librette\Doctrine\Queries;
 
+use Kdyby\StrictObjects\Scream;
+
 /**
  * @author David Matejka
  */
-class EntityQuery extends BaseQueryObject
+class EntityQuery implements QueryInterface
 {
+    use Scream;
 
 	/** @var string */
 	private $entityName;
@@ -27,10 +30,20 @@ class EntityQuery extends BaseQueryObject
 		$this->id = $id;
 	}
 
+    /**
+     * @return string
+     */
+    public function getEntityName() : string
+    {
+        return $this->entityName;
+    }
 
-	protected function doFetch(Queryable $queryable)
-	{
-		return $queryable->getEntityManager()->find($this->entityName, $this->id);
-	}
+    /**
+     * @return mixed
+     */
+    public function getId()
+    {
+        return $this->id;
+    }
 
 }

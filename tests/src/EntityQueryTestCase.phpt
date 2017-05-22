@@ -7,8 +7,8 @@ namespace LibretteTests\Doctrine\Queries;
 use Doctrine\DBAL\Logging\DebugStack;
 use Kdyby\StrictObjects\Scream;
 use Librette\Doctrine\Queries\EntityQuery;
+use Librette\Doctrine\Queries\EntityQueryHandler;
 use Librette\Doctrine\Queries\Queryable;
-use Librette\Doctrine\Queries\QueryHandler;
 use Librette\Queries\QueryHandlerInterface;
 use LibretteTests\Doctrine\Queries\Model\User;
 use Nette;
@@ -36,7 +36,7 @@ class EntityQueryTestCase extends Tester\TestCase
 	public function testAfterInsert() : void
 	{
 		$em = $this->createMemoryManager();
-		$queryHandler = new QueryHandler(new Queryable($em, \Mockery::mock(QueryHandlerInterface::class)));
+		$queryHandler = new EntityQueryHandler(new Queryable($em, \Mockery::mock(QueryHandlerInterface::class)));
 		$em->persist($user = new User('John'));
 		$em->flush();
 		$em->getConnection()->getConfiguration()->setSQLLogger($logger = new DebugStack());
@@ -50,7 +50,7 @@ class EntityQueryTestCase extends Tester\TestCase
 	public function testRepeatedSelect() : void
 	{
 		$em = $this->createMemoryManager();
-		$queryHandler = new QueryHandler(new Queryable($em, \Mockery::mock(QueryHandlerInterface::class)));
+		$queryHandler = new EntityQueryHandler(new Queryable($em, \Mockery::mock(QueryHandlerInterface::class)));
 		$em->persist($user = new User('John'));
 		$em->flush();
 		$em->clear();

@@ -8,6 +8,7 @@ use Doctrine\ORM\EntityManager;
 use Doctrine\ORM\EntityRepository;
 use Kdyby\StrictObjects\Scream;
 use Librette\Doctrine\Queries\PairsQuery;
+use Librette\Doctrine\Queries\PairsQueryHandler;
 use Librette\Doctrine\Queries\Queryable;
 use Librette\Doctrine\Queries\QueryHandler;
 use Librette\Queries\QueryHandlerInterface;
@@ -49,7 +50,7 @@ class PairsQueryTestCase extends Tester\TestCase
 			->shouldReceive('getRepository')
 			->andReturn($repo)
 			->getMock();
-		$queryHandler = new QueryHandler(new Queryable($em, \Mockery::mock(QueryHandlerInterface::class)));
+		$queryHandler = new PairsQueryHandler(new Queryable($em, \Mockery::mock(QueryHandlerInterface::class)));
 		$query = new PairsQuery(User::class, 'name');
 		$query->setKey('id');
 		$query->setFilter(['name' => 'John']);

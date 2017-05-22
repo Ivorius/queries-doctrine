@@ -8,8 +8,8 @@ use Doctrine\DBAL\Logging\DebugStack;
 use Kdyby\StrictObjects\Scream;
 use Librette\Doctrine\Queries\EntityQuery;
 use Librette\Doctrine\Queries\Queryable;
-use Librette\Doctrine\Queries\QueryHandler;
 use Librette\Doctrine\Queries\SelectOneQuery;
+use Librette\Doctrine\Queries\SelectOneQueryHandler;
 use Librette\Queries\QueryHandlerInterface;
 use LibretteTests\Doctrine\Queries\Model\User;
 use Nette;
@@ -37,7 +37,7 @@ class SelectOneQueryTestCase extends Tester\TestCase
 	public function testSelect() : void
 	{
 		$em = $this->createMemoryManager();
-		$queryHandler = new QueryHandler(new Queryable($em, \Mockery::mock(QueryHandlerInterface::class)));
+		$queryHandler = new SelectOneQueryHandler(new Queryable($em, \Mockery::mock(QueryHandlerInterface::class)));
 		$em->persist($john = new User('John'));
 		$em->persist($jack = new User('Jack'));
 		$em->flush();

@@ -4,11 +4,14 @@ declare(strict_types=1);
 
 namespace Librette\Doctrine\Queries;
 
+use Kdyby\StrictObjects\Scream;
+
 /**
  * @author David Matejka
  */
-class PairsQuery extends BaseQueryObject
+class PairsQuery implements QueryInterface
 {
+    use Scream;
 
 	/** @var string */
 	private $value;
@@ -19,14 +22,14 @@ class PairsQuery extends BaseQueryObject
 	/** @var array */
 	private $orderBy = [];
 
-	/** @var string */
+	/** @var string|null */
 	private $key;
 
 	/** @var string */
 	private $entityName;
 
 
-	public function __construct($entityName, $value)
+	public function __construct(string $entityName, string $value)
 	{
 		$this->value = $value;
 		$this->entityName = $entityName;
@@ -68,12 +71,44 @@ class PairsQuery extends BaseQueryObject
 		return $this;
 	}
 
+    /**
+     * @return string
+     */
+    public function getValue() : string
+    {
+        return $this->value;
+    }
 
-	protected function doFetch(Queryable $queryable)
-	{
-		return $queryable->getEntityManager()
-			->getRepository($this->entityName)
-			->findPairs($this->filter, $this->value, $this->orderBy, $this->key);
-	}
+    /**
+     * @return array
+     */
+    public function getFilter() : array
+    {
+        return $this->filter;
+    }
+
+    /**
+     * @return array
+     */
+    public function getOrderBy() : array
+    {
+        return $this->orderBy;
+    }
+
+    /**
+     * @return string|null
+     */
+    public function getKey() : ?string
+    {
+        return $this->key;
+    }
+
+    /**
+     * @return string
+     */
+    public function getEntityName() : string
+    {
+        return $this->entityName;
+    }
 
 }
