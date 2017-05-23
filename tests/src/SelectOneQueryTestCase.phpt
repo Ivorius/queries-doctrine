@@ -2,16 +2,16 @@
 
 declare(strict_types=1);
 
-namespace LibretteTests\Doctrine\Queries;
+namespace UselessSoftTests\Queries\Doctrine;
 
 use Doctrine\DBAL\Logging\DebugStack;
 use Kdyby\StrictObjects\Scream;
-use Librette\Doctrine\Queries\EntityQuery;
-use Librette\Doctrine\Queries\Queryable;
-use Librette\Doctrine\Queries\SelectOneQuery;
-use Librette\Doctrine\Queries\SelectOneQueryHandler;
-use Librette\Queries\QueryHandlerInterface;
-use LibretteTests\Doctrine\Queries\Model\User;
+use UselessSoft\Queries\Doctrine\EntityQuery;
+use UselessSoft\Queries\Doctrine\Queryable;
+use UselessSoft\Queries\Doctrine\SelectOneQuery;
+use UselessSoft\Queries\Doctrine\SelectOneQueryHandler;
+use UselessSoft\Queries\QueryHandlerInterface;
+use UselessSoftTests\Queries\Doctrine\Model\User;
 use Nette;
 use Tester;
 use Tester\Assert;

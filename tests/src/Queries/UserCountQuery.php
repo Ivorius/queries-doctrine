@@ -2,9 +2,9 @@
 
 declare(strict_types=1);
 
-namespace LibretteTests\Doctrine\Queries\Queries;
+namespace UselessSoftTests\Queries\Doctrine\Queries;
 
-use Librette\Doctrine\Queries\QueryInterface;
+use UselessSoft\Queries\Doctrine\QueryInterface;
 
 /**
  * @author David Matejka

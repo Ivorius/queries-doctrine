@@ -2,9 +2,9 @@
 
 declare(strict_types=1);
 
-namespace Librette\Doctrine\Queries;
+namespace UselessSoft\Queries\Doctrine;
 
-use Librette\Queries\QueryInterface as BaseQueryInterface;
+use UselessSoft\Queries\QueryInterface as BaseQueryInterface;
 
 /**
  * @author David Matejka

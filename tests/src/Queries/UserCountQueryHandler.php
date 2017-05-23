@@ -2,13 +2,13 @@
 
 declare(strict_types=1);
 
-namespace LibretteTests\Doctrine\Queries\Queries;
+namespace UselessSoftTests\Queries\Doctrine\Queries;
 
 use Kdyby\StrictObjects\Scream;
-use Librette\Doctrine\Queries\Queryable;
-use Librette\Doctrine\Queries\QueryHandlerInterface;
-use Librette\Queries\QueryInterface;
-use LibretteTests\Doctrine\Queries\Model\User;
+use UselessSoft\Queries\Doctrine\Queryable;
+use UselessSoft\Queries\Doctrine\QueryHandlerInterface;
+use UselessSoft\Queries\QueryInterface;
+use UselessSoftTests\Queries\Doctrine\Model\User;
 
 class UserCountQueryHandler implements QueryHandlerInterface
 {

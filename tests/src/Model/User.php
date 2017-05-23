@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace LibretteTests\Doctrine\Queries\Model;
+namespace UselessSoftTests\Queries\Doctrine\Model;
 
 use Doctrine\ORM\Mapping as ORM;
 use Kdyby\Doctrine\Entities\Attributes\Identifier;

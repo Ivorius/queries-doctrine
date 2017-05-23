@@ -2,17 +2,17 @@
 
 declare(strict_types=1);
 
-namespace LibretteTests\Doctrine\Queries;
+namespace UselessSoftTests\Queries\Doctrine;
 
 use Doctrine\ORM\EntityManager;
 use Doctrine\ORM\EntityRepository;
 use Kdyby\StrictObjects\Scream;
-use Librette\Doctrine\Queries\PairsQuery;
-use Librette\Doctrine\Queries\PairsQueryHandler;
-use Librette\Doctrine\Queries\Queryable;
-use Librette\Doctrine\Queries\QueryHandler;
-use Librette\Queries\QueryHandlerInterface;
-use LibretteTests\Doctrine\Queries\Model\User;
+use UselessSoft\Queries\Doctrine\PairsQuery;
+use UselessSoft\Queries\Doctrine\PairsQueryHandler;
+use UselessSoft\Queries\Doctrine\Queryable;
+use UselessSoft\Queries\Doctrine\QueryHandler;
+use UselessSoft\Queries\QueryHandlerInterface;
+use UselessSoftTests\Queries\Doctrine\Model\User;
 use Nette;
 use Tester;
 use Tester\Assert;

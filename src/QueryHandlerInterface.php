@@ -2,9 +2,9 @@
 
 declare(strict_types=1);
 
-namespace Librette\Doctrine\Queries;
+namespace UselessSoft\Queries\Doctrine;
 
-use Librette\Queries\QueryHandlerInterface as BaseQueryHandlerInterface;
+use UselessSoft\Queries\QueryHandlerInterface as BaseQueryHandlerInterface;
 
 interface QueryHandlerInterface extends BaseQueryHandlerInterface
 {

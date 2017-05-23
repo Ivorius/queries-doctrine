@@ -1,9 +1,9 @@
 {
-	"name": "librette/doctrine-queries",
+	"name": "useless-soft/queries-doctrine",
 	"license": ["BSD-3-Clause"],
 	"require": {
 		"php": "^7.1",
-		"librette/queries": "dev-dev",
+		"useless-soft/queries": "dev-master",
 		"nette/utils": "~2.2",
 		"kdyby/doctrine": "@dev",
 		"doctrine/orm": "^2.5",
@@ -16,16 +16,10 @@
 	},
 	"autoload": {
 		"psr-4": {
-			"Librette\\Doctrine\\Queries\\": "src/"
+			"UselessSoft\\Queries\\Doctrine\\": "src/"
 		},
 		"files": [
 			"src/exceptions.php"
 		]
-	},
-	"repositories": [
-		{
-			"type": "vcs",
-			"url": "https://github.com/Majkl578/librette-queries"
-		}
-	]
+	}
 }

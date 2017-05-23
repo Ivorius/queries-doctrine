@@ -2,17 +2,17 @@
 
 declare(strict_types=1);
 
-namespace Librette\Doctrine\Queries;
+namespace UselessSoft\Queries\Doctrine;
 
 use Doctrine;
 use Doctrine\ORM\Query;
 use Doctrine\ORM\QueryBuilder;
 use Kdyby\StrictObjects\Scream;
-use Librette\Doctrine\Queries\Specifications\TSpecificationQuery;
-use Librette\Queries\InvalidArgumentException;
-use Librette\Queries\QueryableInterface;
-use Librette\Queries\ResultSetInterface;
-use Librette\Queries\ResultSetQueryInterface;
+use UselessSoft\Queries\Doctrine\Specifications\TSpecificationQuery;
+use UselessSoft\Queries\InvalidArgumentException;
+use UselessSoft\Queries\QueryableInterface;
+use UselessSoft\Queries\ResultSetInterface;
+use UselessSoft\Queries\ResultSetQueryInterface;
 
 /**
  * @author David Matejka

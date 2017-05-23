@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace LibretteTests\Doctrine\Queries;
+namespace UselessSoftTests\Queries\Doctrine;
 
 use Doctrine\Common\Cache\ArrayCache;
 use Doctrine\DBAL\Connection;

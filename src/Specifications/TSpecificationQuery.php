@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Librette\Doctrine\Queries\Specifications;
+namespace UselessSoft\Queries\Doctrine\Specifications;
 
 use Doctrine\ORM\Query;
 use Doctrine\ORM\QueryBuilder;

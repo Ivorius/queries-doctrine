@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace LibretteTests\Doctrine\Queries\Mocks;
+namespace UselessSoftTests\Queries\Doctrine\Mocks;
 
 use Doctrine\ORM\EntityManager;
 use Kdyby\StrictObjects\Scream;

@@ -2,14 +2,14 @@
 
 declare(strict_types=1);
 
-namespace Librette\Doctrine\Queries;
+namespace UselessSoft\Queries\Doctrine;
 
 use Doctrine\ORM\EntityManager;
 use Doctrine\ORM\Query;
 use Kdyby\Doctrine\QueryBuilder;
 use Kdyby\StrictObjects\Scream;
-use Librette\Queries\QueryableInterface;
-use Librette\Queries\QueryHandlerInterface;
+use UselessSoft\Queries\QueryableInterface;
+use UselessSoft\Queries\QueryHandlerInterface;
 
 /**
  * @author David Matejka

@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Librette\Doctrine\Queries;
+namespace UselessSoft\Queries\Doctrine;
 
 use Kdyby\StrictObjects\Scream;
 

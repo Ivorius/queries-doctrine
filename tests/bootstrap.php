@@ -3,7 +3,7 @@ if (!$loader = include __DIR__ . '/../vendor/autoload.php') {
 	echo 'Install Nette Tester using `composer update --dev`';
 	exit(1);
 }
-$loader->addPsr4('LibretteTests\\Doctrine\\Queries\\', __DIR__ . '/src');
+$loader->addPsr4('UselessSoftTests\\Queries\\Doctrine\\', __DIR__ . '/src');
 
 \Tracy\Debugger::enable(\Tracy\Debugger::DEVELOPMENT, __DIR__ . '/tmp/');
 // configure environment

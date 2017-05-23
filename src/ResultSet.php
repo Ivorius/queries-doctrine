@@ -2,14 +2,14 @@
 
 declare(strict_types=1);
 
-namespace Librette\Doctrine\Queries;
+namespace UselessSoft\Queries\Doctrine;
 
 use Doctrine\ORM;
 use Doctrine\ORM\Tools\Pagination\Paginator as ResultPaginator;
 use Kdyby\Doctrine\NativeQueryWrapper;
 use Kdyby\StrictObjects\Scream;
-use Librette\Queries\InvalidStateException;
-use Librette\Queries\ResultSetInterface;
+use UselessSoft\Queries\InvalidStateException;
+use UselessSoft\Queries\ResultSetInterface;
 
 
 /**
