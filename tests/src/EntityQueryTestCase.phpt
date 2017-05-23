@@ -6,10 +6,10 @@ namespace UselessSoftTests\Queries\Doctrine;
 
 use Doctrine\DBAL\Logging\DebugStack;
 use Kdyby\StrictObjects\Scream;
-use UselessSoft\Queries\Doctrine\EntityQuery;
-use UselessSoft\Queries\Doctrine\EntityQueryHandler;
+use UselessSoft\Queries\Doctrine\Query\EntityQuery;
+use UselessSoft\Queries\Doctrine\Query\EntityQueryHandler;
 use UselessSoft\Queries\Doctrine\Queryable;
-use UselessSoft\Queries\QueryHandlerInterface;
+use UselessSoft\Queries\Doctrine\QueryHandlerInterface;
 use UselessSoftTests\Queries\Doctrine\Model\User;
 use Nette;
 use Tester;

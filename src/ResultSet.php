@@ -8,7 +8,7 @@ use Doctrine\ORM;
 use Doctrine\ORM\Tools\Pagination\Paginator as ResultPaginator;
 use Kdyby\Doctrine\NativeQueryWrapper;
 use Kdyby\StrictObjects\Scream;
-use UselessSoft\Queries\InvalidStateException;
+use UselessSoft\Queries\Exception\InvalidStateException;
 use UselessSoft\Queries\ResultSetInterface;
 
 

@@ -9,15 +9,14 @@ use Doctrine\ORM\Query;
 use Doctrine\ORM\QueryBuilder;
 use Kdyby\StrictObjects\Scream;
 use UselessSoft\Queries\Doctrine\Specifications\TSpecificationQuery;
-use UselessSoft\Queries\InvalidArgumentException;
+use UselessSoft\Queries\Exception\InvalidArgumentException;
 use UselessSoft\Queries\QueryableInterface;
 use UselessSoft\Queries\ResultSetInterface;
-use UselessSoft\Queries\ResultSetQueryInterface;
 
 /**
  * @author David Matejka
  */
-abstract class QueryObject implements ResultSetQueryInterface, QueryInterface
+abstract class QueryObject implements QueryableInterface, QueryInterface
 {
     use Scream;
     use TSpecificationQuery;
