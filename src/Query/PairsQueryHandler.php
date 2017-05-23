@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace UselessSoft\Queries\Doctrine\Query;
 
+use Kdyby\Doctrine\EntityRepository;
 use Kdyby\StrictObjects\Scream;
 use UselessSoft\Queries\Doctrine\Queryable;
 use UselessSoft\Queries\Doctrine\QueryHandlerInterface;
@@ -25,9 +26,12 @@ class PairsQueryHandler implements QueryHandlerInterface
     {
         assert($query instanceof PairsQuery);
 
-        return $this->queryable->getEntityManager()
-            ->getRepository($query->getEntityName())
-            ->findPairs($query->getFilter(), $query->getValue(), $query->getOrderBy(), $query->getKey());
+        $repository = $this->queryable->getEntityManager()
+            ->getRepository($query->getEntityName());
+
+        assert($repository instanceof EntityRepository);
+
+        return $repository->findPairs($query->getFilter(), $query->getValue(), $query->getOrderBy(), $query->getKey());
     }
 
     public function supports(QueryInterface $query) : bool
