@@ -2,9 +2,10 @@
 
 declare(strict_types=1);
 
-namespace UselessSoft\Queries\Doctrine;
+namespace UselessSoft\Queries\Doctrine\Query;
 
 use Kdyby\StrictObjects\Scream;
+use UselessSoft\Queries\Doctrine\QueryInterface;
 
 /**
  * @author David Matejka

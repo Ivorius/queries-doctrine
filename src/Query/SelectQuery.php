@@ -2,9 +2,11 @@
 
 declare(strict_types=1);
 
-namespace UselessSoft\Queries\Doctrine;
+namespace UselessSoft\Queries\Doctrine\Query;
 
 use Doctrine\ORM\QueryBuilder;
+use UselessSoft\Queries\Doctrine\Queryable;
+use UselessSoft\Queries\Doctrine\QueryObject;
 
 /**
  * @author David Matejka

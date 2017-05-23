@@ -2,9 +2,11 @@
 
 declare(strict_types=1);
 
-namespace UselessSoft\Queries\Doctrine;
+namespace UselessSoft\Queries\Doctrine\Query;
 
 use Kdyby\StrictObjects\Scream;
+use UselessSoft\Queries\Doctrine\Queryable;
+use UselessSoft\Queries\Doctrine\QueryHandlerInterface;
 use UselessSoft\Queries\QueryInterface;
 
 class SelectOneQueryHandler implements QueryHandlerInterface

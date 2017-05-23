@@ -2,12 +2,14 @@
 
 declare(strict_types=1);
 
-namespace UselessSoft\Queries\Doctrine;
+namespace UselessSoft\Queries\Doctrine\Query;
 
 use Kdyby\StrictObjects\Scream;
+use UselessSoft\Queries\Doctrine\Queryable;
+use UselessSoft\Queries\Doctrine\QueryHandlerInterface;
 use UselessSoft\Queries\QueryInterface;
 
-class EntityQueryHandler implements QueryHandlerInterface
+class PairsQueryHandler implements QueryHandlerInterface
 {
     use Scream;
 
@@ -21,14 +23,16 @@ class EntityQueryHandler implements QueryHandlerInterface
 
     public function fetch(QueryInterface $query)
     {
-        assert($query instanceof EntityQuery);
+        assert($query instanceof PairsQuery);
 
         return $this->queryable->getEntityManager()
-            ->find($query->getEntityName(), $query->getId());
+            ->getRepository($query->getEntityName())
+            ->findPairs($query->getFilter(), $query->getValue(), $query->getOrderBy(), $query->getKey());
     }
 
     public function supports(QueryInterface $query) : bool
     {
-        return $query instanceof EntityQuery;
+        return $query instanceof PairsQuery;
     }
+
 }
