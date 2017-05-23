@@ -7,9 +7,6 @@ namespace UselessSoft\Queries\Doctrine;
 use Doctrine;
 use UselessSoft\Queries\Doctrine\Specifications\SpecificationQueryTrait;
 
-/**
- * @author David Matejka
- */
 trait QueryObjectTrait
 {
     use SpecificationQueryTrait;

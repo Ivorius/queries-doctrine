@@ -6,9 +6,6 @@ namespace UselessSoftTests\Queries\Doctrine\Queries;
 
 use UselessSoft\Queries\Doctrine\QueryInterface;
 
-/**
- * @author David Matejka
- */
 class UserCountQuery implements QueryInterface
 {
 }

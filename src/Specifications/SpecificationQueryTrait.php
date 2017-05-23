@@ -4,9 +4,6 @@ declare(strict_types=1);
 
 namespace UselessSoft\Queries\Doctrine\Specifications;
 
-/**
- * @author David Matejka
- */
 trait SpecificationQueryTrait
 {
 

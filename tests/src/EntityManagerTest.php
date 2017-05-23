@@ -13,9 +13,6 @@ use Doctrine\ORM\Tools\SchemaTool;
 use Nette;
 
 
-/**
- * @author David Matejka
- */
 trait EntityManagerTest
 {
 

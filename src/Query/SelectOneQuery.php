@@ -7,9 +7,6 @@ namespace UselessSoft\Queries\Doctrine\Query;
 use Kdyby\StrictObjects\Scream;
 use UselessSoft\Queries\Doctrine\QueryInterface;
 
-/**
- * @author David Matejka
- */
 class SelectOneQuery implements QueryInterface
 {
     use Scream;

@@ -12,9 +12,6 @@ use UselessSoft\Queries\Exception\InvalidStateException;
 use UselessSoft\Queries\ResultSetInterface as BaseResultSetInterface;
 
 
-/**
- * @author David Matejka
- */
 class ResultSet implements \IteratorAggregate, ResultSetInterface
 {
     use Scream;

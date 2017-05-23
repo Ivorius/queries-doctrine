@@ -8,9 +8,6 @@ use Doctrine\ORM\QueryBuilder;
 use UselessSoft\Queries\Doctrine\Queryable;
 use UselessSoft\Queries\Doctrine\QueryObject;
 
-/**
- * @author David Matejka
- */
 class SelectQuery extends QueryObject
 {
 

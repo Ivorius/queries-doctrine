@@ -6,9 +6,6 @@ namespace UselessSoft\Queries\Doctrine;
 
 use UselessSoft\Queries\QueryInterface as BaseQueryInterface;
 
-/**
- * @author David Matejka
- */
 interface QueryInterface extends BaseQueryInterface
 {
 

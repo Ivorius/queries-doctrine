@@ -7,9 +7,6 @@ namespace UselessSoft\Queries\Doctrine\Specifications;
 use Doctrine\ORM\Query;
 use Doctrine\ORM\QueryBuilder;
 
-/**
- * @author David Matejka
- */
 interface SpecificationInterface
 {
 

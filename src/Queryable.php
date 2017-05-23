@@ -10,9 +10,6 @@ use Kdyby\Doctrine\QueryBuilder;
 use Kdyby\StrictObjects\Scream;
 use UselessSoft\Queries\QueryHandlerInterface;
 
-/**
- * @author David Matejka
- */
 class Queryable implements QueryableInterface
 {
     use Scream;
