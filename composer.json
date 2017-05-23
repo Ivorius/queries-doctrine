@@ -1,6 +1,6 @@
 {
 	"name": "librette/doctrine-queries",
-	"license": ["BSD-3-Clause", "GPL-2.0", "GPL-3.0"],
+	"license": ["BSD-3-Clause"],
 	"require": {
 		"php": "^7.1",
 		"librette/queries": "dev-dev",
