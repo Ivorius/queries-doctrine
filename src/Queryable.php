@@ -8,7 +8,6 @@ use Doctrine\ORM\EntityManager;
 use Doctrine\ORM\Query;
 use Kdyby\Doctrine\QueryBuilder;
 use Kdyby\StrictObjects\Scream;
-use UselessSoft\Queries\QueryableInterface;
 use UselessSoft\Queries\QueryHandlerInterface;
 
 /**
@@ -21,18 +20,14 @@ class Queryable implements QueryableInterface
 	/** @var EntityManager */
 	protected $entityManager;
 
-	/** @var QueryHandlerInterface */
-	private $queryHandler;
-
 
 	/**
 	 * @param EntityManager
 	 * @param QueryHandlerInterface
 	 */
-	public function __construct(EntityManager $entityManager, QueryHandlerInterface $queryHandler)
+	public function __construct(EntityManager $entityManager)
 	{
 		$this->entityManager = $entityManager;
-		$this->queryHandler = $queryHandler;
 	}
 
 
@@ -57,15 +52,6 @@ class Queryable implements QueryableInterface
 	public function createQuery(string $query) : Query
 	{
 		return $this->entityManager->createQuery($query);
-	}
-
-
-	/**
-	 * @return QueryHandlerInterface
-	 */
-	public function getHandler() : QueryHandlerInterface
-	{
-		return $this->queryHandler;
 	}
 
 

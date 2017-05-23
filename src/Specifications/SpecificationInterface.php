@@ -10,7 +10,7 @@ use Doctrine\ORM\QueryBuilder;
 /**
  * @author David Matejka
  */
-interface ISpecification
+interface SpecificationInterface
 {
 
 	/**
@@ -18,7 +18,7 @@ interface ISpecification
 	 * @param string
 	 * @return void|string|array|mixed
 	 */
-	public function match(QueryBuilder $queryBuilder, $alias);
+	public function match(QueryBuilder $queryBuilder, string $alias);
 
 
 	/**

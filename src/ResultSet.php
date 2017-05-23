@@ -9,7 +9,7 @@ use Doctrine\ORM\Tools\Pagination\Paginator as ResultPaginator;
 use Kdyby\Doctrine\NativeQueryWrapper;
 use Kdyby\StrictObjects\Scream;
 use UselessSoft\Queries\Exception\InvalidStateException;
-use UselessSoft\Queries\ResultSetInterface;
+use UselessSoft\Queries\ResultSetInterface as BaseResultSetInterface;
 
 
 /**
@@ -25,11 +25,11 @@ class ResultSet implements \IteratorAggregate, ResultSetInterface
 	/** @var \Doctrine\ORM\Query */
 	private $query;
 
-	/** @var QueryObject */
+	/** @var QueryObjectInterface */
 	private $queryObject;
 
-	/** @var Queryable */
-	private $repository;
+	/** @var QueryableInterface */
+	private $queryable;
 
 	/** @var bool */
 	private $fetchJoinCollection = TRUE;
@@ -49,11 +49,11 @@ class ResultSet implements \IteratorAggregate, ResultSetInterface
 	 * @param QueryObject
 	 * @param Queryable
 	 */
-	public function __construct(ORM\AbstractQuery $query, ?QueryObject $queryObject = NULL, ?Queryable $repository = NULL)
+	public function __construct(ORM\AbstractQuery $query, ?QueryObjectInterface $queryObject = NULL, ?QueryableInterface $queryable = NULL)
 	{
 		$this->query = $query;
 		$this->queryObject = $queryObject;
-		$this->repository = $repository;
+		$this->queryable = $queryable;
 		if ($this->query instanceof NativeQueryWrapper || $this->query instanceof ORM\NativeQuery) {
 			$this->fetchJoinCollection = FALSE;
 		}
@@ -97,7 +97,7 @@ class ResultSet implements \IteratorAggregate, ResultSetInterface
 	 * @param int
 	 * @return ResultSet
 	 */
-	public function applyPaging(int $offset, int $limit) : ResultSetInterface
+	public function applyPaging(int $offset, int $limit) : BaseResultSetInterface
 	{
 		if ($this->query->getFirstResult() != $offset || $this->query->getMaxResults() != $limit) {
 			$this->query->setFirstResult($offset);
@@ -155,8 +155,8 @@ class ResultSet implements \IteratorAggregate, ResultSetInterface
 		} else {
 			$this->iterator = new \ArrayIterator($this->query->getResult(NULL));
 		}
-		if ($this->repository && $this->queryObject) {
-			$this->queryObject->queryFetched($this->repository, $this->iterator);
+		if ($this->queryable && $this->queryObject) {
+			$this->queryFetched($this->iterator);
 		}
 
 		return $this->iterator;
@@ -201,5 +201,16 @@ class ResultSet implements \IteratorAggregate, ResultSetInterface
 			throw new InvalidStateException("Cannot modify result set, that was already fetched from storage.");
 		}
 	}
+
+    /**
+     * @param \Traversable
+     * @internal
+     */
+    public function queryFetched(\Traversable $data) : void
+    {
+        foreach ($this->queryObject->getPostFetchListeners() as $postFetch) {
+            $postFetch($this->queryObject, $this->queryable, $data);
+        }
+    }
 
 }
