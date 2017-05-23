@@ -73,23 +73,36 @@ class SelectQuery extends QueryObject
 		return $this;
 	}
 
-
-	protected function createQuery(Queryable $queryable) : QueryBuilder
+	/**
+	 * @return string
+	 */
+	public function getEntityClass() : string
 	{
-		$qb = $queryable->createQueryBuilder($this->entityClass, 'e');
-		foreach ($this->filters as $filter) {
-			list ($field, $value) = $filter;
-			if ($value === NULL && $field instanceof \Closure) {
-				$field($qb, 'e');
-			} else {
-				$qb->whereCriteria([$field => $value]);
-			}
-		}
-		foreach ($this->orderBy as $field => $direction) {
-			$qb->autoJoinOrderBy($field, $direction);
-		}
+		return $this->entityClass;
+	}
 
-		return $qb;
+	/**
+	 * @return array
+	 */
+	public function getFilters() : array
+	{
+		return $this->filters;
+	}
+
+	/**
+	 * @return array
+	 */
+	public function getOrderBy() : array
+	{
+		return $this->orderBy;
+	}
+
+	/**
+	 * @return string
+	 */
+	public function getIndexBy() : string
+	{
+		return $this->indexBy;
 	}
 
 }
