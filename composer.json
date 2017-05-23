@@ -1,10 +1,13 @@
 {
-	"name": "librette/doctrine-queries",
-	"license": ["BSD-3-Clause", "GPL-2.0", "GPL-3.0"],
+	"name": "useless-soft/queries-doctrine",
+	"license": ["BSD-3-Clause"],
 	"require": {
-		"librette/queries": "@dev",
+		"php": "^7.1",
+		"useless-soft/queries": "dev-master",
 		"nette/utils": "~2.2",
-		"kdyby/doctrine": "@dev"
+		"kdyby/doctrine": "@dev",
+		"doctrine/orm": "^2.5",
+		"kdyby/strict-objects": "^1.0"
 	},
 	"require-dev": {
 		"nette/tester": "@dev",
@@ -13,7 +16,7 @@
 	},
 	"autoload": {
 		"psr-4": {
-			"Librette\\Doctrine\\Queries\\": "src/"
+			"UselessSoft\\Queries\\Doctrine\\": "src/"
 		},
 		"files": [
 			"src/exceptions.php"

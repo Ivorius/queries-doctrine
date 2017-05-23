@@ -1,23 +1,8 @@
-Licenses
-========
-
-Good news! You may use Librette Framework under the terms of either
-the New BSD License or the GNU General Public License (GPL) version 2 or 3.
-
-The BSD License is recommended for most projects. It is easy to understand and it
-places almost no restrictions on what you can do with the framework. If the GPL
-fits better to your project, you can use the framework under this license.
-
-You don't have to notify anyone which license you are using. You can freely
-use Librette Framework in commercial projects as long as the copyright header
-remains intact.
-
-
-
 New BSD License
 ---------------
 
-Copyright (c) 2014 David Matějka (http://www.matej21.cz)
+Copyright (c) 2017 Michael Moravec
+Copyright (c) 2014 David Matějka (http://www.matej21.cz), Librette Framework
 All rights reserved.
 
 Redistribution and use in source and binary forms, with or without modification,
@@ -44,14 +29,3 @@ loss of use, data, or profits; or business interruption) however caused and on
 any theory of liability, whether in contract, strict liability, or tort
 (including negligence or otherwise) arising in any way out of the use of this
 software, even if advised of the possibility of such damage.
-
-
-
-GNU General Public License
---------------------------
-
-GPL licenses are very very long, so instead of including them here we offer
-you URLs with full text:
-
-- [GPL version 2](http://www.gnu.org/licenses/gpl-2.0.html)
-- [GPL version 3](http://www.gnu.org/licenses/gpl-3.0.html)

@@ -1,9 +1,13 @@
 <?php
-namespace Librette\Doctrine\Queries;
 
-/**
- * @author David Matejka
- */
+declare(strict_types=1);
+
+namespace UselessSoft\Queries\Doctrine\Query;
+
+use Doctrine\ORM\QueryBuilder;
+use UselessSoft\Queries\Doctrine\Queryable;
+use UselessSoft\Queries\Doctrine\QueryObject;
+
 class SelectQuery extends QueryObject
 {
 
@@ -23,18 +27,18 @@ class SelectQuery extends QueryObject
 	/**
 	 * @param string
 	 */
-	public function __construct($entityClass)
+	public function __construct(string $entityClass)
 	{
 		$this->entityClass = $entityClass;
 	}
 
 
 	/**
-	 * @param string|\Closure
+	 * @param callable
 	 * @param string|array|null|mixed
 	 * @return self
 	 */
-	public function filterBy($field, $value = NULL)
+	public function filterBy(callable $field, ?$value = NULL) : self
 	{
 		$this->filters[] = [$field, $value];
 
@@ -47,7 +51,7 @@ class SelectQuery extends QueryObject
 	 * @param string
 	 * @return self
 	 */
-	public function orderBy($field, $direction = 'ASC')
+	public function orderBy(string $field, string $direction = 'ASC') : self
 	{
 		$this->orderBy[$field] = $direction;
 
@@ -59,7 +63,7 @@ class SelectQuery extends QueryObject
 	 * @param string
 	 * @return self
 	 */
-	public function indexBy($field)
+	public function indexBy(string $field) : self
 	{
 		if (strpos($field, '.') === FALSE) {
 			$field = 'e.' . $field;
@@ -70,7 +74,7 @@ class SelectQuery extends QueryObject
 	}
 
 
-	protected function createQuery(Queryable $queryable)
+	protected function createQuery(Queryable $queryable) : QueryBuilder
 	{
 		$qb = $queryable->createQueryBuilder($this->entityClass, 'e');
 		foreach ($this->filters as $filter) {

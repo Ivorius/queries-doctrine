@@ -1,13 +1,17 @@
 <?php
-namespace LibretteTests\Doctrine\Queries;
 
-use Kdyby\Doctrine\EntityManager;
-use Kdyby\Doctrine\EntityRepository;
-use Librette\Doctrine\Queries\PairsQuery;
-use Librette\Doctrine\Queries\Queryable;
-use Librette\Doctrine\Queries\QueryHandler;
-use Librette\Queries\IQueryHandlerAccessor;
-use LibretteTests\Doctrine\Queries\Model\User;
+declare(strict_types=1);
+
+namespace UselessSoftTests\Queries\Doctrine;
+
+use Doctrine\ORM\EntityManager;
+use Doctrine\ORM\EntityRepository;
+use Kdyby\StrictObjects\Scream;
+use UselessSoft\Queries\Doctrine\Query\PairsQuery;
+use UselessSoft\Queries\Doctrine\Query\PairsQueryHandler;
+use UselessSoft\Queries\Doctrine\Queryable;
+use UselessSoft\Queries\Doctrine\QueryHandlerInterface;
+use UselessSoftTests\Queries\Doctrine\Model\User;
 use Nette;
 use Tester;
 use Tester\Assert;
@@ -16,18 +20,19 @@ require_once __DIR__ . '/../bootstrap.php';
 
 
 /**
- * @author David Matějka
  * @testCase
  */
 class PairsQueryTestCase extends Tester\TestCase
 {
-	public function tearDown()
+    use Scream;
+
+	public function tearDown() : void
 	{
 		\Mockery::close();
 	}
 
 
-	public function testBasic()
+	public function testBasic() : void
 	{
 		$repo = \Mockery::mock(EntityRepository::class)
 			->shouldReceive('findPairs')
@@ -43,7 +48,7 @@ class PairsQueryTestCase extends Tester\TestCase
 			->shouldReceive('getRepository')
 			->andReturn($repo)
 			->getMock();
-		$queryHandler = new QueryHandler(new Queryable($em, \Mockery::mock(IQueryHandlerAccessor::class)));
+		$queryHandler = new PairsQueryHandler(new Queryable($em, \Mockery::mock(QueryHandlerInterface::class)));
 		$query = new PairsQuery(User::class, 'name');
 		$query->setKey('id');
 		$query->setFilter(['name' => 'John']);
@@ -56,4 +61,4 @@ class PairsQueryTestCase extends Tester\TestCase
 }
 
 
-\run(new PairsQueryTestCase());
+(new PairsQueryTestCase())->run();

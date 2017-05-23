@@ -1,13 +1,13 @@
 <?php
-namespace Librette\Doctrine\Queries\Specifications;
+
+declare(strict_types=1);
+
+namespace UselessSoft\Queries\Doctrine\Specifications;
 
 use Doctrine\ORM\Query;
 use Doctrine\ORM\QueryBuilder;
 
-/**
- * @author David Matejka
- */
-interface ISpecification
+interface SpecificationInterface
 {
 
 	/**
@@ -15,7 +15,7 @@ interface ISpecification
 	 * @param string
 	 * @return void|string|array|mixed
 	 */
-	public function match(QueryBuilder $queryBuilder, $alias);
+	public function match(QueryBuilder $queryBuilder, string $alias);
 
 
 	/**

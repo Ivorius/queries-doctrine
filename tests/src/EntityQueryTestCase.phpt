@@ -1,12 +1,16 @@
 <?php
-namespace LibretteTests\Doctrine\Queries;
+
+declare(strict_types=1);
+
+namespace UselessSoftTests\Queries\Doctrine;
 
 use Doctrine\DBAL\Logging\DebugStack;
-use Librette\Doctrine\Queries\EntityQuery;
-use Librette\Doctrine\Queries\Queryable;
-use Librette\Doctrine\Queries\QueryHandler;
-use Librette\Queries\IQueryHandlerAccessor;
-use LibretteTests\Doctrine\Queries\Model\User;
+use Kdyby\StrictObjects\Scream;
+use UselessSoft\Queries\Doctrine\Query\EntityQuery;
+use UselessSoft\Queries\Doctrine\Query\EntityQueryHandler;
+use UselessSoft\Queries\Doctrine\Queryable;
+use UselessSoft\Queries\Doctrine\QueryHandlerInterface;
+use UselessSoftTests\Queries\Doctrine\Model\User;
 use Nette;
 use Tester;
 use Tester\Assert;
@@ -15,51 +19,53 @@ require_once __DIR__ . '/../bootstrap.php';
 
 
 /**
- * @author David Matějka
  * @testCase
  */
 class EntityQueryTestCase extends Tester\TestCase
 {
-	use EntityManagerTest;
+    use EntityManagerTest;
+    use Scream;
 
 
-	public function setUp()
+	public function setUp() : void
 	{
 	}
 
 
-	public function testAfterInsert()
+	public function testAfterInsert() : void
 	{
 		$em = $this->createMemoryManager();
-		$queryHandler = new QueryHandler(new Queryable($em, \Mockery::mock(IQueryHandlerAccessor::class)));
-		$em->persist($user = new User('John'))->flush();
+		$queryHandler = new EntityQueryHandler(new Queryable($em, \Mockery::mock(QueryHandlerInterface::class)));
+		$em->persist($user = new User('John'));
+		$em->flush();
 		$em->getConnection()->getConfiguration()->setSQLLogger($logger = new DebugStack());
 		Assert::same(0, $logger->currentQuery);
-		$query = new EntityQuery(User::class, $user->id);
+		$query = new EntityQuery(User::class, $user->getId());
 		Assert::same($user, $queryHandler->fetch($query));
 		Assert::same(0, $logger->currentQuery);
 	}
 
 
-	public function testRepeatedSelect()
+	public function testRepeatedSelect() : void
 	{
 		$em = $this->createMemoryManager();
-		$queryHandler = new QueryHandler(new Queryable($em, \Mockery::mock(IQueryHandlerAccessor::class)));
-		$em->persist($user = new User('John'))->flush();
+		$queryHandler = new EntityQueryHandler(new Queryable($em, \Mockery::mock(QueryHandlerInterface::class)));
+		$em->persist($user = new User('John'));
+		$em->flush();
 		$em->clear();
 
 		$em->getConnection()->getConfiguration()->setSQLLogger($logger = new DebugStack());
 		Assert::same(0, $logger->currentQuery);
-		$query = new EntityQuery(User::class, $user->id);
-		Assert::same($user->id, $user2 = $queryHandler->fetch($query)->id);
+		$query = new EntityQuery(User::class, $user->getId());
+		Assert::same($user->getId(), $user2 = $queryHandler->fetch($query)->getId());
 		Assert::same(1, $logger->currentQuery);
 
-		$query = new EntityQuery(User::class, $user->id);
-		Assert::same($user2, $queryHandler->fetch($query)->id);
+		$query = new EntityQuery(User::class, $user->getId());
+		Assert::same($user2, $queryHandler->fetch($query)->getId());
 		Assert::same(1, $logger->currentQuery);
 	}
 
 }
 
 
-\run(new EntityQueryTestCase());
+(new EntityQueryTestCase())->run();

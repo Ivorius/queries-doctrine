@@ -1,34 +1,30 @@
 <?php
-namespace Librette\Doctrine\Queries;
 
-use Kdyby\Doctrine\EntityManager;
+declare(strict_types=1);
+
+namespace UselessSoft\Queries\Doctrine;
+
+use Doctrine\ORM\EntityManager;
+use Doctrine\ORM\Query;
 use Kdyby\Doctrine\QueryBuilder;
-use Librette\Queries\IQueryable;
-use Librette\Queries\IQueryHandler;
-use Librette\Queries\IQueryHandlerAccessor;
-use Nette\Object;
+use Kdyby\StrictObjects\Scream;
+use UselessSoft\Queries\QueryHandlerInterface;
 
-/**
- * @author David Matejka
- */
-class Queryable extends Object implements IQueryable
+class Queryable implements QueryableInterface
 {
+    use Scream;
 
 	/** @var EntityManager */
 	protected $entityManager;
 
-	/** @var IQueryHandlerAccessor */
-	private $queryHandlerAccessor;
-
 
 	/**
 	 * @param EntityManager
-	 * @param IQueryHandlerAccessor
+	 * @param QueryHandlerInterface
 	 */
-	public function __construct(EntityManager $entityManager, IQueryHandlerAccessor $queryHandlerAccessor)
+	public function __construct(EntityManager $entityManager)
 	{
 		$this->entityManager = $entityManager;
-		$this->queryHandlerAccessor = $queryHandlerAccessor;
 	}
 
 
@@ -38,9 +34,9 @@ class Queryable extends Object implements IQueryable
 	 * @param string|null
 	 * @return QueryBuilder
 	 */
-	public function createQueryBuilder($entityClass = NULL, $alias = NULL, $indexBy = NULL)
+	public function createQueryBuilder(?string $entityClass = NULL, ?string $alias = NULL, ?string $indexBy = NULL) : QueryBuilder
 	{
-		$qb = $this->entityManager->createQueryBuilder();
+		$qb = new QueryBuilder($this->entityManager);
 		if ($entityClass) {
 			$qb->from($entityClass, $alias, $indexBy);
 			$qb->select($alias);
@@ -50,25 +46,16 @@ class Queryable extends Object implements IQueryable
 	}
 
 
-	public function createQuery($query)
+	public function createQuery(string $query) : Query
 	{
 		return $this->entityManager->createQuery($query);
 	}
 
 
 	/**
-	 * @return IQueryHandler
-	 */
-	public function getHandler()
-	{
-		return $this->queryHandlerAccessor->get();
-	}
-
-
-	/**
 	 * @return EntityManager
 	 */
-	public function getEntityManager()
+	public function getEntityManager() : EntityManager
 	{
 		return $this->entityManager;
 	}

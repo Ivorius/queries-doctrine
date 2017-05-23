@@ -1,17 +1,28 @@
 <?php
-namespace LibretteTests\Doctrine\Queries\Model;
+
+declare(strict_types=1);
+
+namespace UselessSoftTests\Queries\Doctrine\Model;
 
 use Doctrine\ORM\Mapping as ORM;
 use Kdyby\Doctrine\Entities\Attributes\Identifier;
 use Kdyby\Doctrine\Entities\BaseEntity;
+use Kdyby\StrictObjects\Scream;
 
 /**
  * @ORM\Entity
  */
-class User extends BaseEntity
+class User
 {
-	use Identifier;
+    use Scream;
 
+    /**
+     * @ORM\Id
+     * @ORM\GeneratedValue
+     * @ORM\Column(type="integer")
+     * @var int
+     */
+    private $id;
 
 	/**
 	 * @var string
@@ -20,10 +31,25 @@ class User extends BaseEntity
 	protected $name;
 
 
-	public function __construct($name)
+	public function __construct(string $name)
 	{
 		$this->name = $name;
 	}
 
+    /**
+     * @return int
+     */
+    public function getId() : int
+    {
+        return $this->id;
+    }
+
+    /**
+     * @return string
+     */
+    public function getName() : string
+    {
+        return $this->name;
+    }
 
 }

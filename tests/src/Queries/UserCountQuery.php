@@ -1,22 +1,11 @@
 <?php
-namespace LibretteTests\Doctrine\Queries\Queries;
 
-use Librette\Doctrine\Queries\BaseQueryObject;
-use Librette\Doctrine\Queries\Queryable;
-use LibretteTests\Doctrine\Queries\Model\User;
+declare(strict_types=1);
 
-/**
- * @author David Matejka
- */
-class UserCountQuery extends BaseQueryObject
+namespace UselessSoftTests\Queries\Doctrine\Queries;
+
+use UselessSoft\Queries\Doctrine\QueryInterface;
+
+class UserCountQuery implements QueryInterface
 {
-
-
-	protected function doFetch(Queryable $queryable)
-	{
-		return (int) $queryable->createQueryBuilder(User::class, 'u')
-			->select('COUNT(u.id) AS c')
-			->getQuery()->getSingleScalarResult();
-	}
-
 }

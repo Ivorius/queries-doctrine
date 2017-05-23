@@ -1,38 +1,39 @@
 <?php
-namespace LibretteTests\Doctrine\Queries;
+
+declare(strict_types=1);
+
+namespace UselessSoftTests\Queries\Doctrine;
 
 use Doctrine\Common\Cache\ArrayCache;
+use Doctrine\DBAL\Connection;
 use Doctrine\DBAL\Driver\PDOSqlite\Driver;
+use Doctrine\ORM\Configuration;
+use Doctrine\ORM\EntityManager;
 use Doctrine\ORM\Tools\SchemaTool;
-use Kdyby;
 use Nette;
 
 
-/**
- * @author David Matejka
- */
 trait EntityManagerTest
 {
 
 	/**
-	 * @return Kdyby\Doctrine\EntityManager
+	 * @return EntityManager
 	 */
-	protected function createMemoryManager($createSchema = TRUE)
+	protected function createMemoryManager(bool $createSchema = TRUE) : EntityManager
 	{
 		$conf = [
 			'driver' => 'pdo_sqlite',
 			'memory' => TRUE,
 		];
-		$connection = new Kdyby\Doctrine\Connection($conf, new Driver());
-		$config = new Kdyby\Doctrine\Configuration();
+		$connection = new Connection($conf, new Driver());
+		$config = new Configuration();
 		$cache = new ArrayCache();
 		$config->setMetadataCacheImpl($cache);
 		$config->setQueryCacheImpl($cache);
 		$config->setProxyDir(TEMP_DIR);
 		$config->setProxyNamespace('TestProxy');
-		$config->setDefaultRepositoryClassName(Kdyby\Doctrine\EntityDao::class);
 		$config->setMetadataDriverImpl($config->newDefaultAnnotationDriver([__DIR__], FALSE));
-		$em = Kdyby\Doctrine\EntityManager::create($connection, $config);
+		$em = EntityManager::create($connection, $config);
 		if ($createSchema === FALSE) {
 			return $em;
 		}
