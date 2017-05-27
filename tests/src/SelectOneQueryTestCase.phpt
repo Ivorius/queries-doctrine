@@ -40,11 +40,11 @@ class SelectOneQueryTestCase extends Tester\TestCase
 		$em->persist($jack = new User('Jack'));
 		$em->flush();
 		$query = new SelectOneQuery(User::class, ['name' => 'John']);
-		Assert::same($john, $queryHandler->fetch($query));
+		Assert::same($john, $queryHandler->handle($query));
 		$query = new SelectOneQuery(User::class, ['name' => 'Jack']);
-		Assert::same($jack, $queryHandler->fetch($query));
+		Assert::same($jack, $queryHandler->handle($query));
 		$query = new SelectOneQuery(User::class, ['name' => 'Jane']);
-		Assert::null($queryHandler->fetch($query));
+		Assert::null($queryHandler->handle($query));
 	}
 
 }

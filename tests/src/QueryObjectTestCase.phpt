@@ -41,7 +41,7 @@ class QueryObjectTestCase extends TestCase
         $em->getConnection()->getConfiguration()->setSQLLogger($logger = new DebugStack());
         Assert::same(0, $logger->currentQuery);
         $query = new UsersQueryObject(['Janie']);
-        $result = $queryHandler->fetch($query);
+        $result = $queryHandler->handle($query);
         Assert::type(ResultSet::class, $result);
         Assert::same([$janie], $result->toArray());
         Assert::same(1, $logger->currentQuery);

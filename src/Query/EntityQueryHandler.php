@@ -21,7 +21,7 @@ class EntityQueryHandler implements QueryHandlerInterface
         $this->queryable = $queryable;
     }
 
-    public function fetch(QueryInterface $query)
+    public function handle(QueryInterface $query)
     {
         assert($query instanceof EntityQuery);
 

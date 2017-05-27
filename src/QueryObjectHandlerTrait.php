@@ -19,7 +19,7 @@ trait QueryObjectHandlerTrait
      * @param QueryInterface
      * @return ResultSetInterface
      */
-    public function fetch(BaseQueryInterface $queryObject) : BaseResultSetInterface
+    public function handle(BaseQueryInterface $queryObject) : BaseResultSetInterface
     {
         assert($queryObject instanceof QueryObjectInterface);
 

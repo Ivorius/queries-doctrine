@@ -22,7 +22,7 @@ class UserCountQueryHandler implements QueryHandlerInterface
         $this->queryable = $queryable;
     }
 
-    public function fetch(QueryInterface $queryable) : int
+    public function handle(QueryInterface $queryable) : int
     {
         return (int) $this->queryable->createQueryBuilder(User::class, 'u')
             ->select('COUNT(u.id) AS c')

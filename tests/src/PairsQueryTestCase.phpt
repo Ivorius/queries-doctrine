@@ -53,7 +53,7 @@ class PairsQueryTestCase extends Tester\TestCase
 		$query->setKey('id');
 		$query->setFilter(['name' => 'John']);
 		$query->setOrderBy(['name' => 'ASC']);
-		$queryHandler->fetch($query);
+		$queryHandler->handle($query);
 
 		Assert::true(TRUE);
 	}
