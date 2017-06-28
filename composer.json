@@ -3,9 +3,9 @@
 	"license": ["BSD-3-Clause"],
 	"require": {
 		"php": "^7.1",
-		"useless-soft/queries": "dev-master",
-		"nette/utils": "~2.2",
-		"kdyby/doctrine": "@dev",
+		"useless-soft/queries": "^0.1",
+		"nette/utils": "^2.2",
+		"kdyby/doctrine": "^3.2",
 		"doctrine/orm": "^2.5",
 		"kdyby/strict-objects": "^1.0"
 	},
