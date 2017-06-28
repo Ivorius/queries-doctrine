@@ -5,7 +5,7 @@ declare(strict_types=1);
 namespace UselessSoftTests\Queries\Doctrine;
 
 use Doctrine\ORM\EntityManager;
-use Doctrine\ORM\EntityRepository;
+use Kdyby\Doctrine\EntityRepository;
 use Kdyby\StrictObjects\Scream;
 use UselessSoft\Queries\Doctrine\Query\PairsQuery;
 use UselessSoft\Queries\Doctrine\Query\PairsQueryHandler;
