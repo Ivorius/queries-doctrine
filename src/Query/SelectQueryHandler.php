@@ -27,11 +27,14 @@ class SelectQueryHandler extends QueryObjectHandler
             if ($value === NULL && $field instanceof \Closure) {
                 $field($qb, 'e');
             } else {
-                $qb->whereCriteria([$field => $value]);
+                $paramName = 'param_' . (count($qb->getParameters()) + 1);
+                $fieldName = strpos($field, '.') === false ? sprintf('%s.%s', $qb->getRootAliases()[0], $field) : $field;
+                $qb->andWhere(sprintf('%s = :%s', $fieldName, $paramName));
+                $qb->setParameter($paramName, $value);
             }
         }
         foreach ($queryObject->getOrderBy() as $field => $direction) {
-            $qb->autoJoinOrderBy($field, $direction);
+            $qb->addOrderBy($field, $direction);
         }
 
         return $qb;

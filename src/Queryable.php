@@ -6,9 +6,8 @@ namespace UselessSoft\Queries\Doctrine;
 
 use Doctrine\ORM\EntityManager;
 use Doctrine\ORM\Query;
-use Kdyby\Doctrine\QueryBuilder;
+use Doctrine\ORM\QueryBuilder;
 use Kdyby\StrictObjects\Scream;
-use UselessSoft\Queries\QueryHandlerInterface;
 
 class Queryable implements QueryableInterface
 {
