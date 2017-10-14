@@ -38,7 +38,7 @@ class SelectQuery extends QueryObject
 	 * @param string|array|null|mixed
 	 * @return self
 	 */
-	public function filterBy(callable $field, ?$value = NULL) : self
+	public function filterBy(callable $field, $value = NULL) : self
 	{
 		$this->filters[] = [$field, $value];
 
