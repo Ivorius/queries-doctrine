@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace UselessSoft\Queries\Doctrine;
 
-use Doctrine\ORM\EntityManager;
+use Doctrine\ORM\EntityManagerInterface;
 use Doctrine\ORM\Query;
 use Doctrine\ORM\QueryBuilder;
 use Kdyby\StrictObjects\Scream;
@@ -13,15 +13,15 @@ class Queryable implements QueryableInterface
 {
     use Scream;
 
-	/** @var EntityManager */
+	/** @var EntityManagerInterface */
 	protected $entityManager;
 
 
 	/**
-	 * @param EntityManager
+	 * @param EntityManagerInterface
 	 * @param QueryHandlerInterface
 	 */
-	public function __construct(EntityManager $entityManager)
+	public function __construct(EntityManagerInterface $entityManager)
 	{
 		$this->entityManager = $entityManager;
 	}
@@ -52,9 +52,9 @@ class Queryable implements QueryableInterface
 
 
 	/**
-	 * @return EntityManager
+	 * @return EntityManagerInterface
 	 */
-	public function getEntityManager() : EntityManager
+	public function getEntityManager() : EntityManagerInterface
 	{
 		return $this->entityManager;
 	}

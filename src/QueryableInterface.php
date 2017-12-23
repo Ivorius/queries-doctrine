@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace UselessSoft\Queries\Doctrine;
 
-use Doctrine\ORM\EntityManager;
+use Doctrine\ORM\EntityManagerInterface;
 use Doctrine\ORM\Query;
 use Doctrine\ORM\QueryBuilder;
 
@@ -22,7 +22,7 @@ interface QueryableInterface
     public function createQuery(string $query) : Query;
 
     /**
-     * @return EntityManager
+     * @return EntityManagerInterface
      */
-    public function getEntityManager() : EntityManager;
+    public function getEntityManager() : EntityManagerInterface;
 }
