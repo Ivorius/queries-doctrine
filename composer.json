@@ -6,7 +6,7 @@
 		"useless-soft/queries": "^0.1",
 		"nette/utils": "^3.0",
 		"doctrine/orm": "^2.5",
-		"kdyby/strict-objects": "^1.0"
+		"kdyby/strict-objects": "^3.0-dev"
 	},
 	"require-dev": {
 		"nette/tester": "@dev",
